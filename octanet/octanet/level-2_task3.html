@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="task3.css">
+    <title>to-do webapp</title>
+</head>
+<body>
+    <video id="ab" autoplay muted loop>
+        <source src="p.mp4" type="video/mp4">
+    </video>
+    <div class="a">
+        <div id="a">
+            <form onsubmit="return saveData()">
+                <input type="text" name="" placeholder="Title" id="abc">
+                <br>
+                <input type="text" name="" placeholder="Description" id="abcd">
+                <button type="submit" id="kk">Save</button>
+            </form>
+        </div>
+        <div id="b">
+            <table>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Delete</th>
+                </tr>
+                <tr>
+                    <td class="title">title1</td>
+                    <td class="description">title1 description</td>
+                    <td> <button class="delete" onclick="deleteRow(this)">X</button></td>
+                </tr>
+                <tr>
+                    <td class="title">title2</td>
+                    <td class="description">title2 description</td>
+                    <td> <button class="delete" onclick="deleteRow(this)">X</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function saveData() {
+            var titleInput = document.getElementById('abc');
+            var descriptionInput = document.getElementById('abcd');
+
+            var title = titleInput.value;
+            var description = descriptionInput.value;
+
+            // Create a new row in the table
+            var table = document.querySelector('table');
+            var newRow = table.insertRow(table.rows.length);
+
+            // Insert cells with the title, description, and delete button
+            var titleCell = newRow.insertCell(0);
+            titleCell.textContent = title;
+
+            var descriptionCell = newRow.insertCell(1);
+            descriptionCell.textContent = description;
+
+            var deleteCell = newRow.insertCell(2);
+            var deleteButton = document.createElement('button');
+            deleteButton.textContent = 'X';
+            deleteButton.className = 'delete';
+            deleteButton.onclick = function() {
+                deleteRow(this);
+            };
+            deleteCell.appendChild(deleteButton);
+
+            // Clear input fields
+            titleInput.value = '';
+            descriptionInput.value = '';
+
+            return false; // Prevent form submission
+        }
+
+        function deleteRow(button) {
+            var row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+    </script>
+</body>
+</html>
